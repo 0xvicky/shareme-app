@@ -94,8 +94,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 Frontend
+1) File Structring
 
-1)Routing: First wrap the whole app to the react router in index.js file....
+2)Routing: First wrap the whole app to the react router in index.js file....
   Majors: Routes, Route, useNavigate
   Implement them in the App.js
 
