@@ -1,11 +1,14 @@
 import './App.css';
+import {Routes, Route, useNavigate} from "react-router-dom"
+import { Home,SignIn } from './container';
 
 function App() {
   return (
   <>
-<div className="text-blue-500 h-screen bg-yellow-500">
-  Shareme App
-</div>
+  <Routes>
+  <Route path="signin" element={<SignIn/>} />
+  <Route path="/*" element={<Home/>} />
+  </Routes>
   </>
   );
 }

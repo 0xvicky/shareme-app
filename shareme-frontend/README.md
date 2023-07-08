@@ -91,4 +91,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Steps to build to the application ##
 
-1)
+
+
+Frontend
+
+1)Routing: First wrap the whole app to the react router in index.js file....
+  Majors: Routes, Route, useNavigate
+  Implement them in the App.js
+
+
+Backend(Sanity)
+
+1) Setup sanity store: Write all the required schemas
