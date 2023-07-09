@@ -76,7 +76,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 2) @sanity/image-url : To interact with images on the backend of the sanity
 
-3) react-google-login : To get the google authentication
+3) react-oauth: To get the google authentication
 
 4) react-icons : To get the svg icons for the app
 
@@ -87,7 +87,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 7) uuid: To get unique identifier
 
 8) react-router-dom: To get the proper routing in our app
-
+9) jwt-decode: To decode the credential of signedIn user to use them in the application
 
 ## Steps to build to the application ##
 

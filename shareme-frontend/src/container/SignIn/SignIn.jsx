@@ -1,13 +1,30 @@
 import React from "react";
 import "./SignIn.css"
-import { FcGoogle } from "react-icons/fc"
 import { useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
+
+import {client} from "../../client";
 
 const SignIn = () => {
-
+  const navigate = useNavigate()
   const handleSignIn = (res) => {
-    console.log(res)
+   const userInfo = jwt_decode(res.credential)//Decode the credential of user to readable information
+
+   localStorage.setItem('user',JSON.stringify(userInfo))//store the user info in the local storage
+   const {name,sub,picture} = userInfo;
+   const doc = {
+     _id:sub,//This _id is keyword and mandatory
+    _type:'user', //This _type also
+    username:name,
+    image:picture
+   } //Whole doc will be added to the sanity datastore
+
+   client.createIfNotExists(doc).then(()=>{
+   navigate("/")
+   })
+
+
   }
 
   return (
@@ -30,11 +47,10 @@ const SignIn = () => {
 
             <GoogleOAuthProvider
               clientId="458847142767-re2lqg9i3jk57atap59lar4aatlkrahc.apps.googleusercontent.com"
-
               >
               <GoogleLogin
-                onSuccess={(credRes) => {
-                  console.log(credRes)
+                onSuccess={(resCred)=>{
+                  handleSignIn(resCred)
                 }}
                 onError={() => {
                   console.log("Login Failed")
