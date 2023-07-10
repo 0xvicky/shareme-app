@@ -20,8 +20,8 @@ const SignIn = () => {
     image:picture
    } //Whole doc will be added to the sanity datastore
 
-   client.createIfNotExists(doc).then(()=>{
-   navigate("/")
+   client.createIfNotExists(doc).then(()=>{ //This function only create the doc if it is not present in the sanity datastore.....
+   navigate("/",{replace:true})
    })
 
 
