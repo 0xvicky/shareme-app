@@ -9,7 +9,7 @@ import { userQuery } from "../../utils/data";
 import { client } from "../../client";
 
 const Home = () => {
-  const [toogleSideBar, setToogleSideBar] = useState(false);
+  const [toggleSideBar, setToggleSideBar] = useState(false);
   const [user, setUser] = useState()
   const scrollRef = useRef(null)
 
@@ -18,6 +18,7 @@ const Home = () => {
   useEffect(() => {
     const query = userQuery(userInfo?.sub);
     client.fetch(query).then(res => {
+      console.log(res)
       setUser(res[0])//gets the user data stored in sanity datastore
     })
   }, []);
@@ -28,11 +29,10 @@ const Home = () => {
         <div className="hidden md:flex h-screen flex-initial">
           <Sidebar user ={user && user} />
         </div>
-        <div className="md:hidden flex bg-gradient-to-br from-purple-700 to-sky-500  items-center justify-between p-2 w-full shadow-md">
+        <div className="md:hidden flex  items-center justify-between p-2 w-full shadow-md">
           <HiMenu fontSize={36} onClick={() => {
-            setToogleSideBar(true)
-          }} />
-
+            setToggleSideBar(true)
+          }} className="cursor-pointer"/>
           <Link to="/">
             <div className="flex items-center">
               <img src="/Assets/camera.svg" className="mr-3" />
@@ -45,14 +45,14 @@ const Home = () => {
           </Link>
         </div>
  {
-  toogleSideBar &&
+  toggleSideBar &&
  ( <>
 <div className="fixed w-5/6 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
 
   <div className="absolute w-full flex justify-end items-center p-2">
-<AiFillCloseCircle fontSize={30} className="cursor-pointer" onClick={()=>{setToogleSideBar(false)}}/>
+<AiFillCloseCircle fontSize={30} className="cursor-pointer" onClick={()=>{setToggleSideBar(false)}}/>
   </div>
-  <Sidebar user ={user && user}/>
+  <Sidebar user ={user && user} closeToggle={setToggleSideBar}/>
 </div>
   </>)
  }
