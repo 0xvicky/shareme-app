@@ -14,13 +14,14 @@ const Sidebar = ({ user, closeToggle }) => {
     { name: "gaming" },
     { name: "coding" },
     { name: "cars" },
+    { name: "photography" },
     { name: "savita" }
   ]
   const handleSidebar = () => {
     if (closeToggle) closeToggle(false)
   }
   return (
-    <div className="flex flex-col bg-gray-100 pl-3 pt-6 h-full">
+    <div className="flex flex-col bg-gray-100 pt-3 h-full">
       <Link to="/" onClick={handleSidebar} className="py-3">
         <div className="flex items-center ">
           <img src="/Assets/camera.svg" className="mr-3" />
@@ -56,8 +57,8 @@ const Sidebar = ({ user, closeToggle }) => {
 
       <Link to={`user-profile/${user?._id}`} onClick={handleSidebar}>
         <div className="mb-4 flex items-center gap-4 font-bold shadow-md shadow-slate-700 w-fit p-3 rounded-lg">
-          <img src={user.image} alt="" className="rounded-full h-10 w-10" />
-          <h3>{user.username}</h3>
+          <img src={user?.image} alt="" className="rounded-full h-10 w-10" />
+          <h3>{user?.username}</h3>
         </div>
       </Link>
     </div>
