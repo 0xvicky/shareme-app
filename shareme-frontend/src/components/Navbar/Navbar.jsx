@@ -1,14 +1,16 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom"
+import { NavLink, Link, useNavigate } from "react-router-dom"
 import { BiSearchAlt } from "react-icons/bi"
 import { BsPlusSquareFill } from "react-icons/bs"
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, search, setSearch }) => {
+    const navigate = useNavigate()
+    if (!user) return null
     return (
-        <div className="flex items-center justify-between  shadow-md shadow-gray-300 p-3">
-            <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between shadow-md shadow-gray-300 p-3">
+            <div className="flex justify-between items-center " onClick={() => { navigate("/search") }}>
                 <BiSearchAlt fontSize={30} />
-                <input type="text" className="border-none outline-none p-2 caret-gray-500 " placeholder="Search" />
+                <input type="text" className="border-none outline-none p-2 caret-gray-500 " placeholder="Search" onChange={(e) => { setSearch(e.target.value) }} value={search} />
             </div>
             <div className=" md:flex gap-10 hidden items-center ">
                 <BsPlusSquareFill fontSize={40} className="cursor-pointer" />
