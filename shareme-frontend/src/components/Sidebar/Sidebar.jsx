@@ -6,33 +6,60 @@ import { IoIosArrowForward } from "react-icons/io"
 
 const Sidebar = ({ user, closeToggle }) => {
 
-  /******STYLES*********** */
-  const isActiveStyle = "flex gap-2 items-center border-r-2 mx-2  font-bold bg-gradient-to-r from-slate-400 border-black"
-  const isNotActiveStyle = ""
+  const isActiveStyle = "flex gap-2 items-center border-r-2  font-bold bg-gradient-to-r from-slate-400 border-black capitalize"
+  const isNotActiveStyle = "flex gap-2 items-center capitalize "
 
-  /*******LOGICS********** */
-
+  const categories = [
+    { name: "animals" },
+    { name: "gaming" },
+    { name: "coding" },
+    { name: "cars" },
+    { name: "savita" }
+  ]
   const handleSidebar = () => {
     if (closeToggle) closeToggle(false)
   }
   return (
-    <div className="flex flex-col ml-3 my-7 md:hidden">
+    <div className="flex flex-col bg-gray-100 pl-3 pt-6 h-full">
       <Link to="/" onClick={handleSidebar} className="py-3">
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <img src="/Assets/camera.svg" className="mr-3" />
           <p className="font-bold bg-gread">Pinsta</p>App
         </div>
       </Link>
-      <div className="flex flex-col gap-4 mt-3">
+      <div className="flex flex-col gap-4 mt-3  h-screen">
+
         <NavLink to="/" className={({ isActive }) => {
           return (
             isActive ? isActiveStyle : isNotActiveStyle
           )
-        }}><RiHomeFill />Home</NavLink>
+        }} onClick={handleSidebar}><RiHomeFill />home</NavLink>
 
-        <h3>Discover Categories</h3>
+        <h3 className="font-bold ">Discover Categories</h3>
+        {
+          categories.map((item, index) => {
+            return <NavLink to={`/categories/${item.name}`}
+              className={({ isActive }) => {
+                return (
+                  isActive ? isActiveStyle : isNotActiveStyle
+                )
+              }}
+              onClick={handleSidebar}
+              key={index}
+            >
+              {item.name}
+            </NavLink>
+          })
+        }
 
       </div>
+
+      <Link to={`user-profile/${user?._id}`} onClick={handleSidebar}>
+        <div className="mb-4 flex items-center gap-4 font-bold shadow-md shadow-slate-700 w-fit p-3 rounded-lg">
+          <img src={user.image} alt="" className="rounded-full h-10 w-10" />
+          <h3>{user.username}</h3>
+        </div>
+      </Link>
     </div>
   )
 };

@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <>
       <div
-       className="flex md:flex-row flex-col transition-height duration-150 ease-linear p-2">
+        className="flex md:flex-row flex-col transition-height duration-150 ease-linear p-2">
         <div className="hidden md:flex h-screen flex-initial">
           <Sidebar user={user && user} />
         </div>
@@ -42,7 +42,7 @@ const Home = () => {
           </Link>
 
           <Link to={`user-profile/${user?._id}`}>
-            <img src={user?.image} className="mr-3 rounded-full h-10 w-10 " />
+            <img src={user?.image} className="mr-3 rounded-full h-10 w-10 shadow-md shadow-slate-600 hover:shadow-slate-800" />
           </Link>
         </div>
         {
@@ -52,7 +52,7 @@ const Home = () => {
               <div className="absolute w-full flex justify-end items-center p-2 ">
                 <AiFillCloseCircle fontSize={30} className="cursor-pointer" onClick={() => { setToggleSideBar(false) }} />
               </div>
-                <Sidebar user={user && user} closeToggle={setToggleSideBar} />
+              <Sidebar user={user && user} closeToggle={setToggleSideBar} />
             </div>
           </>)
         }
