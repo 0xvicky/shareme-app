@@ -8,17 +8,16 @@ const Pins = ({ user }) => {
 
   return (
     <div className="px-2 m-2">
-      <div className="bg-slate-200">
-        <Navbar search={search} setSearch={setSearch} />
+      <div className=" p-3 ">
+        <Navbar search={search} setSearch={setSearch} user={user && user} />
       </div>
       <div>
         <Routes>
           <Route path="/" element={<Feed />} />
           <Route path="/category/:categoryId" element={<Feed />} />
-          <Route path="/pin-details/:pinId" element={<PinDetails />} />
-          <Route path="/create-pin" element={<CreatePin />} />
+          <Route path="/pin-details/:pinId" element={<PinDetails user={user && user} />} />
+          <Route path="/create-pin" element={<CreatePin user={user && user} />} />
           <Route path="/search" element={<Search search={search} setSearch={setSearch} />} />
-
         </Routes>
       </div>
     </div>
