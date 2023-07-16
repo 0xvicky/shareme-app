@@ -4,7 +4,7 @@ const Spinner = ({ msg }) => {
     return (<>
         <div className="flex flex-col  items-center">
             <Rings color="gray" />
-            <h3>{msg}</h3>
+            <h3 className="font-medium text-xl">{msg}</h3>
         </div>
     </>
     )
