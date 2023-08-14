@@ -27,7 +27,7 @@ postedBy->{
   return categoryInfo;
 };
 
-export const feedQuery = `*[_type == "pin" | order(_createAt desc)]{
+export const feedQuery = `*[_type == "pin"] | order(_createAt desc){
   image{
     asset->{url}
   },

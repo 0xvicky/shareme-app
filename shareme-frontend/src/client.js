@@ -1,7 +1,7 @@
-import {createClient} from '@sanity/client'
+import {createClient} from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 
-export const client =   createClient({
+export const client = createClient({
   projectId: process.env.REACT_APP_PROJECT_ID_SANITY,
   dataset: "production",
   apiVersion: "2023-05-03",
@@ -12,5 +12,5 @@ export const client =   createClient({
 const builder = imageUrlBuilder(client);
 
 export const urlFor = src => {
-  builder.image(src);
+  return builder.image(src);
 };

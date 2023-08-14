@@ -9,7 +9,7 @@ import MasonryLayout from "../MasonryLayout/MasonryLayout";
 
 const Feed = () => {
     const [loading, setLoading] = useState(false);
-    const [pins, setPins] = useState()
+    const [pins, setPins] = useState(null)
     const { categoryId } = useParams()
 
     useEffect(() => {
