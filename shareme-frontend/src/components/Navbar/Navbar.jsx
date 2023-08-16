@@ -5,9 +5,8 @@ import {BsPlusSquareFill} from "react-icons/bs";
 
 const Navbar = ({user, search, setSearch}) => {
   const navigate = useNavigate();
-  if (!user || user === null) {
-    navigate("/signin");
-  }
+
+  if (!user) return null;
 
   return (
     <div className='flex items-center justify-between shadow-md shadow-gray-300 p-3'>
@@ -31,6 +30,9 @@ const Navbar = ({user, search, setSearch}) => {
         <BsPlusSquareFill
           fontSize={40}
           className='cursor-pointer'
+          onClick={() => {
+            navigate("/create-pin");
+          }}
         />
         <Link to={`user-profile/${user?._id}`}>
           <img

@@ -3,7 +3,7 @@ import "./Home.css";
 import {HiMenu} from "react-icons/hi";
 import {AiFillCloseCircle} from "react-icons/ai";
 import {Routes, Route, useNavigate, Link} from "react-router-dom";
-import {Sidebar, UserProfile} from "../../components";
+import {CreatePin, Sidebar, UserProfile} from "../../components";
 import Pins from "../Pins/Pins";
 import {userQuery} from "../../utils/data";
 import {client} from "../../client";
@@ -15,13 +15,18 @@ const Home = () => {
   const scrollRef = useRef(null);
 
   const userInfo = fetchUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const query = userQuery(userInfo?.sub);
-    client.fetch(query).then(res => {
-      console.log(res);
-      setUser(res[0]); //gets the user data stored in sanity datastore
-    });
+    if (userInfo === null) {
+      navigate("/signin");
+    } else {
+      const query = userQuery(userInfo?.sub);
+      client.fetch(query).then(res => {
+        console.log(res);
+        setUser(res[0]); //gets the user data stored in sanity datastore
+      });
+    }
   }, []);
 
   return (
@@ -76,7 +81,7 @@ const Home = () => {
         )}
 
         <div
-          className='pb-2  flex-1 h-screen overflow-y-scroll'
+          className='pb-2 flex-1 h-screen overflow-y-scroll'
           ref={scrollRef}>
           <Routes>
             <Route
