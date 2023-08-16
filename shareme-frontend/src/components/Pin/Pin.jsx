@@ -17,7 +17,6 @@ const Pin = ({pin: {image, postedBy, _id, save, destination}}) => {
 
   const isAlreadySaved = !!save?.filter(item => item?.postedBy?._id === userInfo.sub)
     ?.length; //true or false
-  console.log(postedBy);
 
   //save->[]
   //1->[2,4,1]=>  save.filter()->[1].length->!!1->true
@@ -46,7 +45,7 @@ const Pin = ({pin: {image, postedBy, _id, save, destination}}) => {
   };
 
   const handlePinDelete = id => {
-    console.log(`Pin deleted with ID:${id}`);
+    // console.log(`Pin deleted with ID:${id}`);
     client.delete(id).then(() => {
       window.location.reload();
     });
@@ -65,7 +64,7 @@ const Pin = ({pin: {image, postedBy, _id, save, destination}}) => {
         }}
         className='relative cursor-pointer hover:transform hover:scale-105 transition duration-300'>
         <img
-          className=' rouned-md  w-full h-full'
+          className='rouned-md w-full h-full'
           src={urlFor(image).width(250).url()}
           alt=''
         />
@@ -142,7 +141,7 @@ const Pin = ({pin: {image, postedBy, _id, save, destination}}) => {
           className={`rounded-full h-9 w-9 object-cover shadow-md shadow-slate-900 `}
         />
 
-        <p className='font-semibold'>{postedBy?.name}</p>
+        <p className='font-semibold capitalize'>{postedBy?.username}</p>
       </Link>
     </div>
   );

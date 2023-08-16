@@ -9,7 +9,6 @@ const Navbar = ({user, search, setSearch}) => {
     navigate("/signin");
   }
 
-  console.log(user);
   return (
     <div className='flex items-center justify-between shadow-md shadow-gray-300 p-3'>
       <div
