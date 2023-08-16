@@ -20,28 +20,25 @@ const Pin = ({pin: {image, postedBy, _id, save}}) => {
   //3->[2,4,1]=>  save.filter()->[].length->!!0->false
 
   const handleSave = id => {
-    console.log(id);
-    console.log(userInfo.sub);
-    console.log(`This is userINfo:${userInfo}`);
-    // if (!isAlreadySaved) {
-    //   client
-    //     .patch(id)
-    //     .setIfMissing({save: []})
-    //     .insert("after", "save[-1]", [
-    //       {
-    //         _key: uuidv4(),
-    //         userId: userInfo?.googleId,
-    //         postedBy: {
-    //           _type: "postedBy",
-    //           _ref: userInfo?.googleId
-    //         }
-    //       }
-    //     ])
-    //     .commit()
-    //     .then(res => {
-    //       window.location.reload();
-    //     });
-    // }
+    if (!isAlreadySaved) {
+      client
+        .patch(id)
+        .setIfMissing({save: []})
+        .insert("after", "save[-1]", [
+          {
+            _key: uuidv4(),
+            userId: userInfo?.googleId,
+            postedBy: {
+              _type: "postedBy",
+              _ref: userInfo?.googleId
+            }
+          }
+        ])
+        .commit()
+        .then(res => {
+          window.location.reload();
+        });
+    }
   };
 
   return (
@@ -79,11 +76,7 @@ const Pin = ({pin: {image, postedBy, _id, save}}) => {
                 </a>
               </div>
               {isAlreadySaved ? (
-                <button
-                  className='bg-red-500 text-white p-2 rounded-lg opacity-75 hover:opacity-100 outline-none hover:shadow-md'
-                  onClick={e => {
-                    handleSave(_id);
-                  }}>
+                <button className='bg-red-500 text-white p-2 rounded-lg opacity-75 hover:opacity-100 outline-none hover:shadow-md'>
                   {save?.length} Saved
                 </button>
               ) : (
