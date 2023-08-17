@@ -46,8 +46,9 @@ const Pin = ({pin: {image, postedBy, _id, save, destination}}) => {
 
   const handlePinDelete = id => {
     // console.log(`Pin deleted with ID:${id}`);
-    client.delete(id).then(() => {
+    client.delete(id).then(res => {
       window.location.reload();
+      // console.log(res);
     });
   };
   return (
@@ -60,7 +61,7 @@ const Pin = ({pin: {image, postedBy, _id, save, destination}}) => {
           setpinHovered(false);
         }}
         onClick={() => {
-          navigate(`/pin-detail/${_id}`);
+          navigate(`/pin-details/${_id}`);
         }}
         className='relative cursor-pointer hover:transform hover:scale-105 transition duration-300'>
         <img
