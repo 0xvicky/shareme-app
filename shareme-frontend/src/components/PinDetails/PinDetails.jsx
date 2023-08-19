@@ -3,16 +3,18 @@ import {useNavigate, useParams, Link} from "react-router-dom";
 import {v4 as uuidv4} from "uuid";
 import {client, urlFor} from "../../client";
 import {pinDetailQuery, pinDetailMorePinQuery} from "../../utils/data";
+import {fetchUser} from "../../utils/fetchUser";
 
 import {MdDownloadForOffline} from "react-icons/md";
 import {MasonryLayout, Spinner} from "../index";
 
 const PinDetails = ({user}) => {
   const [pinDetail, setPinDetail] = useState(null);
-  const [comment, setComment] = useState(null);
+  const [comment, setComment] = useState("");
   const [pins, setPins] = useState(null);
 
   const {pinId} = useParams();
+  const userInfo = fetchUser();
 
   const fetchPinDetails = () => {
     let query = pinDetailQuery(pinId);
@@ -30,12 +32,34 @@ const PinDetails = ({user}) => {
       });
     }
   };
+
+  const addComment = () => {
+    client
+      .patch(pinId)
+      .setIfMissing({comment: []})
+      .insert("after", "save[-1]", [
+        {
+          _key: uuidv4(),
+          comment: comment,
+          postedBy: {
+            _type: "postedBy",
+            _ref: userInfo?.sub
+          }
+        }
+      ])
+      .commit()
+      .then(res => {
+        setComment("");
+        window.location.reload();
+      });
+  };
+
   useEffect(() => {
     fetchPinDetails();
   }, [pinId]);
 
   if (!pinDetail) return <Spinner msg='Loading...' />;
-  console.log(pinDetail);
+
   return (
     <>
       {pinDetail && (
@@ -85,23 +109,41 @@ const PinDetails = ({user}) => {
               <p className='font-semibold capitalize'>{pinDetail.postedBy?.username}</p>
             </Link>
             <h2 className='mt-7 text-2xl'>Comments</h2>
-            <div className='max-h-370 overflow-y-auto'></div>
+            <div className='flex justify-between gap-4 mt-5 pb-8 p-2 border-b-2 '>
+              <input
+                type='text'
+                value={comment}
+                placeholder='Add Comment'
+                onChange={e => {
+                  setComment(e.target.value);
+                }}
+                className='outline-none text-bg w-2/3 shadow-md rounded-md p-1 py-2 caret-sky-500'
+              />
+              <button
+                type='button'
+                className='bg-sky-500 text-white px-2 p-1 rounded-md  hover:shadow-sky-500 hover:shadow-lg transition-all duration-200'
+                onClick={addComment}>
+                Add Comment
+              </button>
+            </div>
+            <div className='max-h-370 overflow-y-auto'>
+              {pinDetail?.comments?.map(comment => {
+                return (
+                  <div className='flex gap-2 mt-4 items-center'>
+                    <img
+                      src={comment?.postedBy.image}
+                      alt=''
+                      className='w-10 h-10 rounded-full cursor-pointer'
+                    />
+                    <div className='flex flex-col'>
+                      <p className='font-semibold'>{comment?.postedBy.username}</p>
+                      <p>{comment.comment}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          {pinDetail?.comments?.map(comment => {
-            return (
-              <div className='flex gap-2 mt-4 items-center'>
-                <img
-                  src={comment?.postedBy.image}
-                  alt=''
-                  className='w-10 h-10 rounded-full cursor-pointer'
-                />
-                <div className='flex flex-col'>
-                  <p className='font-semibold'>{comment?.postedBy.username}</p>
-                  <p>{comment.comment}</p>
-                </div>
-              </div>
-            );
-          })}
         </div>
       )}
     </>
