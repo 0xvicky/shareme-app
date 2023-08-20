@@ -2,6 +2,7 @@ export default {
   name: 'comment',
   title: 'Comment',
   type: 'document',
+  liveEdit: true,
   fields: [
     {
       name: 'comment',
@@ -14,5 +15,4 @@ export default {
       type: 'postedBy',
     },
   ],
-  liveEdit: true,
 }

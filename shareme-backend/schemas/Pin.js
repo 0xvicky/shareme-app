@@ -2,6 +2,7 @@ export default {
   name: 'pin',
   title: 'Pin',
   type: 'document',
+  liveEdit: true,
   fields: [
     {
       name: 'title',
@@ -62,5 +63,4 @@ export default {
       ],
     },
   ],
-  liveEdit: true,
 }

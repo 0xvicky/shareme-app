@@ -2,6 +2,7 @@ export default {
   name: 'save',
   title: 'Save',
   type: 'document',
+  liveEdit: true,
   fields: [
     {
       name: 'userId',
@@ -14,5 +15,4 @@ export default {
       type: 'postedBy',
     },
   ],
-  liveEdit: true,
 }

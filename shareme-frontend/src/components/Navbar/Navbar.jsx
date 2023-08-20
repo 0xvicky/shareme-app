@@ -26,10 +26,10 @@ const Navbar = ({user, search, setSearch}) => {
           value={search}
         />
       </div>
-      <div className=' md:flex gap-10 hidden items-center '>
+      <div className=' md:flex gap-10 hidden items-center'>
         <BsPlusSquareFill
           fontSize={40}
-          className='cursor-pointer'
+          className='cursor-pointer shadow-black shadow-md rounded-md hover:scale-105 transition-all duration-300'
           onClick={() => {
             navigate("/create-pin");
           }}

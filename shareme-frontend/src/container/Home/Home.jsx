@@ -85,7 +85,7 @@ const Home = () => {
           ref={scrollRef}>
           <Routes>
             <Route
-              path={`/user-profile/${user?._id}`}
+              path={`/user-profile/:userId`}
               element={<UserProfile />}
             />
             <Route

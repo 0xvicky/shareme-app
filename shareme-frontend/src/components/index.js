@@ -7,3 +7,4 @@ export {default as CreatePin} from "./CreatePin/CreatePin";
 export {default as Search} from "./Search/Search";
 export {default as Pin} from "./Pin/Pin";
 export {default as Spinner} from "./Spinner/Spinner";
+export {default as MasonryLayout} from "./MasonryLayout/MasonryLayout";
