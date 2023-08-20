@@ -10,7 +10,7 @@ import {fetchUser} from "../../utils/fetchUser";
 import {client} from "../../client";
 import {v4 as uuidv4} from "uuid";
 const Pin = ({pin: {image, postedBy, _id, save, destination}}) => {
-  const [pinHovered, setpinHovered] = useState(false);
+  const [pinHovered, setPinHovered] = useState(false);
 
   const navigate = useNavigate();
   const userInfo = fetchUser();
@@ -55,10 +55,10 @@ const Pin = ({pin: {image, postedBy, _id, save, destination}}) => {
     <div className='m-4'>
       <div
         onMouseEnter={() => {
-          setpinHovered(true);
+          setPinHovered(true);
         }}
         onMouseLeave={() => {
-          setpinHovered(false);
+          setPinHovered(false);
         }}
         onClick={() => {
           navigate(`/pin-details/${_id}`);

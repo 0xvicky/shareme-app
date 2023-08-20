@@ -16,6 +16,7 @@ const PinDetails = ({user}) => {
   const [isCommenting, setIsCommenting] = useState(false);
 
   const {pinId} = useParams();
+  console.log(pinId);
   const userInfo = fetchUser();
 
   //Function to fetch the pin details when clicked on it

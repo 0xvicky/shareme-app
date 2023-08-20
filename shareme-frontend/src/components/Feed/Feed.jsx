@@ -10,7 +10,7 @@ const Feed = () => {
   const [loading, setLoading] = useState(false);
   const [pins, setPins] = useState(null);
   const {categoryId} = useParams();
-  console.log(categoryId);
+
   useEffect(() => {
     setLoading(true);
 
@@ -43,7 +43,19 @@ const Feed = () => {
   }, [categoryId]);
 
   if (loading) return <Spinner msg='We are adding ideas to your feed !' />;
-  return <div>{pins && <MasonryLayout pins={pins} />}</div>;
+  return (
+    <div>
+      {pins.length > 0 ? (
+        <MasonryLayout pins={pins} />
+      ) : (
+        <>
+          <div className='flex justify-center items-center h-screen font-bold text-2xl '>
+            No Pins Found
+          </div>
+        </>
+      )}
+    </div>
+  );
 };
 
 export default Feed;
