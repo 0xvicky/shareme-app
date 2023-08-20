@@ -27,6 +27,7 @@ const Feed = () => {
     } else {
       try {
         client.fetch(feedQuery).then(res => {
+          console.log(res);
           setPins(res);
         });
         setTimeout(() => {

@@ -12,6 +12,7 @@ const PinDetails = ({user}) => {
   const [pinDetail, setPinDetail] = useState(null);
   const [comment, setComment] = useState("");
   const [pins, setPins] = useState(null);
+  const [isCommenting, setIsCommenting] = useState(false);
 
   const {pinId} = useParams();
   const userInfo = fetchUser();
@@ -22,6 +23,7 @@ const PinDetails = ({user}) => {
     if (query) {
       client.fetch(query).then(res => {
         setPinDetail(res[0]);
+        console.log(res);
 
         if (res[0]) {
           query = pinDetailMorePinQuery(res);
@@ -34,24 +36,28 @@ const PinDetails = ({user}) => {
   };
 
   const addComment = () => {
-    client
-      .patch(pinId)
-      .setIfMissing({comment: []})
-      .insert("after", "save[-1]", [
-        {
-          _key: uuidv4(),
-          comment: comment,
-          postedBy: {
-            _type: "postedBy",
-            _ref: userInfo?.sub
+    if (comment) {
+      setIsCommenting(true);
+      client
+        .patch(pinId)
+        .setIfMissing({comments: []})
+        .insert("after", "comments[-1]", [
+          {
+            _key: uuidv4(),
+            comment,
+            postedBy: {
+              _type: "postedBy",
+              _ref: userInfo?.sub
+            }
           }
-        }
-      ])
-      .commit()
-      .then(res => {
-        setComment("");
-        window.location.reload();
-      });
+        ])
+        .commit()
+        .then(res => {
+          fetchPinDetails();
+          setComment("");
+          setIsCommenting(false);
+        });
+    }
   };
 
   useEffect(() => {
@@ -109,7 +115,13 @@ const PinDetails = ({user}) => {
               <p className='font-semibold capitalize'>{pinDetail.postedBy?.username}</p>
             </Link>
             <h2 className='mt-7 text-2xl'>Comments</h2>
-            <div className='flex justify-between gap-4 mt-5 pb-8 p-2 border-b-2 '>
+            <div className='flex items-center  justify-between gap-4 mt-5 pb-8 p-2 border-b-2 '>
+              <img
+                src={pinDetail.postedBy?.image}
+                alt=''
+                className={`rounded-full h-9 w-9 object-cover shadow-md shadow-slate-600 `}
+              />
+
               <input
                 type='text'
                 value={comment}
@@ -117,13 +129,13 @@ const PinDetails = ({user}) => {
                 onChange={e => {
                   setComment(e.target.value);
                 }}
-                className='outline-none text-bg w-2/3 shadow-md rounded-md p-1 py-2 caret-sky-500'
+                className='outline-none text-bg w-2/3 shadow-md rounded-md p-1 py-2 caret-sky-500 focus:border focus:border-sky-400 '
               />
               <button
                 type='button'
-                className='bg-sky-500 text-white px-2 p-1 rounded-md  hover:shadow-sky-500 hover:shadow-lg transition-all duration-200'
+                className='bg-sky-500 text-white px-1 p-1 rounded-md  hover:shadow-sky-500 hover:shadow-lg transition-all duration-200'
                 onClick={addComment}>
-                Add Comment
+                {isCommenting ? `Posting...` : `Post`}
               </button>
             </div>
             <div className='max-h-370 overflow-y-auto'>
