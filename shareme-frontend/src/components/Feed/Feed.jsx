@@ -10,7 +10,7 @@ const Feed = () => {
   const [loading, setLoading] = useState(false);
   const [pins, setPins] = useState(null);
   const {categoryId} = useParams();
-
+  console.log(categoryId);
   useEffect(() => {
     setLoading(true);
 
@@ -18,7 +18,10 @@ const Feed = () => {
       //will show only the feeds whose category id provided
       const query = searchQuery(categoryId);
       try {
-        client.fetch(query).then(res => setPins(res));
+        client.fetch(query).then(res => {
+          console.log(res);
+          setPins(res);
+        });
         setTimeout(() => setLoading(false), 1000); //to avoid flickering effect
         setLoading(false);
       } catch (error) {

@@ -173,7 +173,7 @@ const PinDetails = ({user}) => {
       {console.log(pins)}
       {pins?.length > 0 ? (
         <>
-          <h2>More Pins</h2>
+          <h2 className='font-semibold text-xl my-4'>More Pins</h2>
           <MasonryLayout pins={pins} />
         </>
       ) : (

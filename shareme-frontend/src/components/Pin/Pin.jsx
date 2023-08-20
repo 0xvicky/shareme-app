@@ -52,7 +52,7 @@ const Pin = ({pin: {image, postedBy, _id, save, destination}}) => {
     });
   };
   return (
-    <div className='m-2'>
+    <div className='m-4'>
       <div
         onMouseEnter={() => {
           setpinHovered(true);

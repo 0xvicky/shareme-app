@@ -47,7 +47,7 @@ const SignIn = () => {
               <p className='font-bold '>Pinsta</p>App
             </div>
 
-            <GoogleOAuthProvider clientId={process.env.REACT_APP_OAUTH_CRED}>
+            <GoogleOAuthProvider clientId='458847142767-re2lqg9i3jk57atap59lar4aatlkrahc.apps.googleusercontent.com'>
               <GoogleLogin
                 onSuccess={resCred => {
                   handleSignIn(resCred);
