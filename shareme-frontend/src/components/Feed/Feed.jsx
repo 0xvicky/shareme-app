@@ -45,7 +45,7 @@ const Feed = () => {
   if (loading) return <Spinner msg='We are adding ideas to your feed !' />;
   return (
     <div>
-      {pins.length > 0 ? (
+      {pins?.length > 0 ? (
         <MasonryLayout pins={pins} />
       ) : (
         <>
