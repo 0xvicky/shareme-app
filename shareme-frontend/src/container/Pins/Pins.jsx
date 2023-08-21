@@ -1,9 +1,12 @@
 import React, {useState} from "react";
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, useNavigate} from "react-router-dom";
 import {Navbar, Feed, PinDetails, CreatePin, Search} from "../../components";
+import {BsPlusSquareFill} from "react-icons/bs";
 
 const Pins = ({user}) => {
   const [search, setSearch] = useState("");
+
+  const navigate = useNavigate();
 
   return (
     <div className='px-2 m-2'>
@@ -42,6 +45,15 @@ const Pins = ({user}) => {
             }
           />
         </Routes>
+      </div>
+      <div className='md:hidden w-full flex justify-center p-2  bg-white rounded-md bottom-0 fixed'>
+        <BsPlusSquareFill
+          fontSize={40}
+          className='cursor-pointer shadow-black shadow-md rounded-md hover:scale-105 transition-all duration-300'
+          onClick={() => {
+            navigate("/create-pin");
+          }}
+        />
       </div>
     </div>
   );

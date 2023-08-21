@@ -19,7 +19,6 @@ const Feed = () => {
       const query = searchQuery(categoryId);
       try {
         client.fetch(query).then(res => {
-          console.log(res);
           setPins(res);
         });
         setTimeout(() => setLoading(false), 1000); //to avoid flickering effect
@@ -30,7 +29,6 @@ const Feed = () => {
     } else {
       try {
         client.fetch(feedQuery).then(res => {
-          console.log(res);
           setPins(res);
         });
         setTimeout(() => {
@@ -45,6 +43,7 @@ const Feed = () => {
   if (loading) return <Spinner msg='We are adding ideas to your feed !' />;
   return (
     <div>
+      {!pins && <Spinner msg='Loading Pins...' />}
       {pins?.length > 0 ? (
         <MasonryLayout pins={pins} />
       ) : (

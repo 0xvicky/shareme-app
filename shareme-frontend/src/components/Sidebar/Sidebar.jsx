@@ -14,7 +14,7 @@ const Sidebar = ({user, closeToggle}) => {
     if (closeToggle) closeToggle(false);
   };
   return (
-    <div className='flex flex-col bg-gray-100 pt-3 h-full'>
+    <div className='flex flex-col bg-gray-100 pt-3 px-2  h-full'>
       <Link
         to='/'
         onClick={handleSidebar}

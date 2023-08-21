@@ -61,7 +61,7 @@ const UserProfile = () => {
     <div className='relative justify-center items-center h-full pb-2 '>
       <div className='flex flex-col pb-5 '>
         <div className='relative flex flex-col mb-7 '>
-          <div className='flex flex-col items-center justify-center'>
+          <div className='flex flex-col justify-center items-center'>
             <img
               src={randomImage}
               alt='banner-img'
@@ -103,14 +103,14 @@ const UserProfile = () => {
                 Saved
               </button>
             </div>
-            {pins?.length > 0 ? (
-              <div className='px-2 mt-4'>
-                <MasonryLayout pins={pins} />
-              </div>
-            ) : (
-              <div>No Pins Found</div>
-            )}
           </div>
+          {pins?.length > 0 ? (
+            <div className='px-2 mt-4'>
+              <MasonryLayout pins={pins} />
+            </div>
+          ) : (
+            <div>No Pins Found</div>
+          )}
         </div>
       </div>
     </div>

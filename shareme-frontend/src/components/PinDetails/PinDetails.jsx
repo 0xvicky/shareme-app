@@ -16,7 +16,7 @@ const PinDetails = ({user}) => {
   const [isCommenting, setIsCommenting] = useState(false);
 
   const {pinId} = useParams();
-  console.log(pinId);
+
   const userInfo = fetchUser();
 
   //Function to fetch the pin details when clicked on it
@@ -171,7 +171,7 @@ const PinDetails = ({user}) => {
           </div>
         </div>
       )}
-      {console.log(pins)}
+
       {pins?.length > 0 ? (
         <>
           <h2 className='font-semibold text-xl my-4'>More Pins</h2>

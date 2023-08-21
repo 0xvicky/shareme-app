@@ -52,7 +52,6 @@ const Home = () => {
               <p className='font-bold '>Pinsta</p>App
             </div>
           </Link>
-
           <Link to={`user-profile/${user?._id}`}>
             <img
               src={user?.image}
